@@ -50,6 +50,7 @@ const Left = styled.div`
 const Right = styled.div`
     button {
         margin-left: 10px;
+        border: 2px solid ${colorDictionary.white};
     }
 `;
 

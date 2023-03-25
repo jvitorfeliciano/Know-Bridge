@@ -2,18 +2,19 @@ import { Button as MuiButton } from "@mui/material";
 import styled from "styled-components";
 import colorDictionary from "../../constants/colors";
 
-export default function Button({ variant = "outlined", children, ...props }) {
+export default function Button({ children, ...props }) {
+ 
+
     return (
-        <StyledButton variant={variant} {...props}>
+        <StyledButton variant="contained" {...props} disableElevation>
             {children}
         </StyledButton>
     );
 }
 
 const StyledButton = styled(MuiButton)`
-    border-radius: 30px !important;
-    border: 2px solid ${colorDictionary.white} !important;
     color: ${colorDictionary.white} !important;
+    border-radius: 20px !important;
     background-color: ${colorDictionary.navyBlue} !important;
     font-family: "Inter", sans-serif !important;
     font-weight: 400 !important;
