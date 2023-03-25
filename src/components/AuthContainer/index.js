@@ -10,7 +10,7 @@ const Container = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(334deg, #14fc74, #13f9c4, #00adbc);
+    background: linear-gradient(334deg,  #f6f4f7, #b9e8e8, #0de5af);
     background-size: 180% 180%;
     animation: gradient-animation 6s ease infinite;
 

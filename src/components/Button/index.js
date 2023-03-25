@@ -14,7 +14,6 @@ export default function Button({ children, ...props }) {
 
 const StyledButton = styled(MuiButton)`
     color: ${colorDictionary.white} !important;
-    border-radius: 20px !important;
     background-color: ${colorDictionary.navyBlue} !important;
     font-family: "Inter", sans-serif !important;
     font-weight: 400 !important;
