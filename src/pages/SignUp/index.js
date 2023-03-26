@@ -5,19 +5,33 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import InputWrapper from "../../components/InputWrapper";
 import Button from "../../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useSignUp from "../../hooks/api/useSignUp";
 
 export default function SignUp() {
-    const [data, setData] = useState({ firstName: "", lastName: "", userName: "", email: "", senha: "" });
+    const [data, setData] = useState({ firstName: "", lastName: "", userName: "", email: "", password: "" });
+    const { signUp, signUpLoading } = useSignUp();
+    const navigate = useNavigate();
 
     const handleFormChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
 
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            await signUp(data);
+            navigate("/sign-in");
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <AuthContainer>
-            <Form>
+            <Form onSubmit={handleFormSubmit}>
                 <h1>Crie uma nova conta</h1>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <InputWrapper style={{ marginRight: "10px" }}>
@@ -72,7 +86,7 @@ export default function SignUp() {
                         onChange={handleFormChange}
                     />
                 </InputWrapper>
-                <Button fullWidth sx={{ height: "54px" }} type="submit">
+                <Button fullWidth sx={{ height: "54px" }} type="submit" disabled={signUpLoading}>
                     Regitrar-se
                 </Button>
                 <p>
