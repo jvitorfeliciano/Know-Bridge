@@ -24,7 +24,7 @@ export default function SignUp() {
         try {
             await signUp(data);
             navigate("/sign-in");
-            toast.success("Usuário cadastrado com sucesso!", {
+            toast.success("Usuário cadastrado com sucesso", {
                 position: toast.POSITION.TOP_RIGHT,
             });
         } catch (err) {

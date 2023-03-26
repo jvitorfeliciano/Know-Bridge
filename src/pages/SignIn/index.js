@@ -7,11 +7,13 @@ import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useSignIn from "../../hooks/api/useSignIn";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignIn() {
     const [data, setData] = useState({ email: "", password: "" });
     const { signInLoading, signIn } = useSignIn();
-
+    const navigate = useNavigate();
     const handleFormChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
 
     const handleFormSubmit = async (e) => {
@@ -19,11 +21,15 @@ export default function SignIn() {
 
         try {
             const response = await signIn(data);
-            console.log(response);
+
+            navigate(`/user/${response.userName}`);
         } catch (err) {
-            console.log(err);
+            toast.error(err.response.data.errors, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
         }
     };
+
     return (
         <AuthContainer>
             <Form onSubmit={handleFormSubmit}>
@@ -55,6 +61,7 @@ export default function SignIn() {
                     Não Possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
                 </p>
             </Form>
+            <ToastContainer autoClose={4000} />
         </AuthContainer>
     );
 }
