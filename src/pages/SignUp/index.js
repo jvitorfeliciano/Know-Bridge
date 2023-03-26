@@ -14,9 +14,7 @@ export default function SignUp() {
     const { signUp, signUpLoading } = useSignUp();
     const navigate = useNavigate();
 
-    const handleFormChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
-    };
+    const handleFormChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
