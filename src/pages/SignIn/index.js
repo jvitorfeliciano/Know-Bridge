@@ -16,7 +16,7 @@ export default function SignIn() {
     const [storedValue, setValue] = useLocalStorage("userData");
     const { signInLoading, signIn } = useSignIn();
     const navigate = useNavigate();
-    console.log('teste')
+
     const handleFormChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
 
     const handleFormSubmit = async (e) => {
