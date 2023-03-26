@@ -6,29 +6,71 @@ import TextField from "@mui/material/TextField";
 import InputWrapper from "../../components/InputWrapper";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function SignUp() {
+    const [data, setData] = useState({ firstName: "", lastName: "", userName: "", email: "", senha: "" });
+
+    const handleFormChange = (e) => {
+        setData({ ...data, [e.target.name]: e.target.value });
+    };
+
     return (
         <AuthContainer>
             <Form>
                 <h1>Crie uma nova conta</h1>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <InputWrapper style={{ marginRight: "10px" }}>
-                        <TextField fullWidth label="Primeiro Nome" type="text" required />
+                        <TextField
+                            fullWidth
+                            name="firstName"
+                            label="Primeiro Nome"
+                            type="text"
+                            required
+                            onChange={handleFormChange}
+                        />
                     </InputWrapper>
                     <InputWrapper>
-                        <TextField fullWidth label="Sobrenome" type="text" required />
+                        <TextField
+                            fullWidth
+                            name="lastName"
+                            label="Sobrenome"
+                            type="text"
+                            required
+                            onChange={handleFormChange}
+                        />
                     </InputWrapper>
                 </Box>
                 <InputWrapper>
-                    <TextField fullWidth label="Nome do usuário" type="text" required />
+                    <TextField
+                        fullWidth
+                        name="userName"
+                        label="Nome do usuário"
+                        type="text"
+                        required
+                        onChange={handleFormChange}
+                    />
                 </InputWrapper>
                 <InputWrapper>
-                    <TextField fullWidth label="E-mail" type="email" required />
+                    <TextField
+                        fullWidth
+                        name="email"
+                        label="E-mail"
+                        type="email"
+                        required
+                        onChange={handleFormChange}
+                    />
                 </InputWrapper>
                 <InputWrapper></InputWrapper>
                 <InputWrapper>
-                    <TextField fullWidth label="Password" type="password" required />
+                    <TextField
+                        fullWidth
+                        name="password"
+                        label="Senha"
+                        type="password"
+                        required
+                        onChange={handleFormChange}
+                    />
                 </InputWrapper>
                 <Button fullWidth sx={{ height: "54px" }} type="submit">
                     Regitrar-se
