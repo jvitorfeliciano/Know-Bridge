@@ -3,8 +3,13 @@ import colorDictionary from "../../constants/colors";
 import logo from "../../assets/images/logo.png";
 import Button from "../Button";
 import StyledLink from "../StyledLink";
+import Avatar from "@mui/material/Avatar";
+import { useContext } from "react";
+import UserContext from "../../contexts/userContext";
 
 export default function Header() {
+    const { userData } = useContext(UserContext);
+
     return (
         <Container>
             <Left>
@@ -17,12 +22,17 @@ export default function Header() {
                 <Legend>Disciplinas</Legend>
             </Middle>
             <Right>
-                <StyledLink>
-                    <Button>Entrar</Button>
-                </StyledLink>
-                <StyledLink>
-                    <Button>Cadastrar-se</Button>
-                </StyledLink>
+                {userData && <Avatar sx={{ bgcolor: "purple" }}>{userData.userName[0]}</Avatar>}
+                {!userData && (
+                    <>
+                        <StyledLink to="/sign-in">
+                            <Button>Entrar</Button>
+                        </StyledLink>
+                        <StyledLink to="/sign-up">
+                            <Button>Cadastrar-se</Button>
+                        </StyledLink>
+                    </>
+                )}
             </Right>
         </Container>
     );
