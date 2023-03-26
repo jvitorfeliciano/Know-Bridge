@@ -1,3 +1,7 @@
+import { useParams } from "react-router-dom";
+
 export default function UserPage() {
-    return <div>Oieee</div>;
+    const { userName } = useParams();
+
+    return <div>Olá {userName}</div>;
 }

@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import UserPage from "./pages/UserPage";
 
 function App() {
     return (
@@ -14,7 +15,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/sign-in" element={<SignIn />} />
-                <Route path="/user/:userName"/>
+                <Route path="/user/:userName" element={<UserPage />} />
             </Routes>
         </BrowserRouter>
     );
