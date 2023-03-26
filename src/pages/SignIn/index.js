@@ -6,15 +6,27 @@ import InputWrapper from "../../components/InputWrapper";
 import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useSignIn from "../../hooks/api/useSignIn";
 
 export default function SignIn() {
     const [data, setData] = useState({ email: "", password: "" });
+    const { signInLoading, signIn, signInError } = useSignIn();
 
     const handleFormChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
 
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await signIn(data);
+            console.log(response);
+        } catch (err) {
+            console.log(err);
+        }
+    };
     return (
         <AuthContainer>
-            <Form>
+            <Form onSubmit={handleFormSubmit}>
                 <h1>Faça login para inciar a sua sessão</h1>
                 <InputWrapper>
                     <TextField
@@ -36,7 +48,7 @@ export default function SignIn() {
                         onChange={handleFormChange}
                     />
                 </InputWrapper>
-                <Button fullWidth sx={{ height: "54px" }} type="submit">
+                <Button fullWidth sx={{ height: "54px" }} type="submit" disabled={signInLoading}>
                     Entrar
                 </Button>
                 <p>
