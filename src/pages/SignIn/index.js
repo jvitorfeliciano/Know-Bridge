@@ -9,11 +9,14 @@ import { useState } from "react";
 import useSignIn from "../../hooks/api/useSignIn";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function SignIn() {
     const [data, setData] = useState({ email: "", password: "" });
+    const [storedValue, setValue] = useLocalStorage("userData");
     const { signInLoading, signIn } = useSignIn();
     const navigate = useNavigate();
+    console.log('teste')
     const handleFormChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
 
     const handleFormSubmit = async (e) => {
@@ -21,7 +24,7 @@ export default function SignIn() {
 
         try {
             const response = await signIn(data);
-
+            setValue(response);
             navigate(`/user/${response.userName}`);
         } catch (err) {
             toast.error(err.response.data.errors, {
