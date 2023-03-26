@@ -16,7 +16,14 @@ function App() {
                 <GlobalStyle />
                 <Header />
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route
+                        path="/"
+                        element={
+                            <AuthRouteGuard>
+                                <HomePage />
+                            </AuthRouteGuard>
+                        }
+                    />
                     <Route
                         path="/sign-up"
                         element={
