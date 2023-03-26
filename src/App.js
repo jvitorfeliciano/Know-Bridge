@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./assets/styles";
+import AuthRouteGuard from "./components/AuthRouteGuard";
 import Header from "./components/Header";
 import ProtectedRouteGuard from "./components/ProtectedRouteGuard";
 import { UserProvider } from "./contexts/userContext";
@@ -16,8 +17,22 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/sign-up" element={<SignUp />} />
-                    <Route path="/sign-in" element={<SignIn />} />
+                    <Route
+                        path="/sign-up"
+                        element={
+                            <AuthRouteGuard>
+                                <SignUp />
+                            </AuthRouteGuard>
+                        }
+                    />
+                    <Route
+                        path="/sign-in"
+                        element={
+                            <AuthRouteGuard>
+                                <SignIn />
+                            </AuthRouteGuard>
+                        }
+                    />
                     <Route
                         path="/user/:userName"
                         element={
