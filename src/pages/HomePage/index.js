@@ -8,7 +8,6 @@ export default function HomePage() {
         <Container>
             <Right>
                 <h1>
-                    {" "}
                     <span style={{ color: colorDictionary.navyBlue }}>KnowBridge</span>, ajudando estudantes a
                     alcançarem os seus sonhos!
                 </h1>

@@ -8,6 +8,8 @@ import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useSignUp from "../../hooks/api/useSignUp";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUp() {
     const [data, setData] = useState({ firstName: "", lastName: "", userName: "", email: "", password: "" });
@@ -22,8 +24,13 @@ export default function SignUp() {
         try {
             await signUp(data);
             navigate("/sign-in");
+            toast.success("Usuário cadastrado com sucesso!", {
+                position: toast.POSITION.TOP_RIGHT,
+            });
         } catch (err) {
-            console.log(err);
+            toast.error(err.response.data.errors, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
         }
     };
 
@@ -88,9 +95,10 @@ export default function SignUp() {
                     Regitrar-se
                 </Button>
                 <p>
-                    Já Cadastrado? <Link to="sign-in">Entrar</Link>
+                    Já Cadastrado? <Link to="/sign-in">Entrar</Link>
                 </p>
             </Form>
+            <ToastContainer autoClose={4000} />
         </AuthContainer>
     );
 }

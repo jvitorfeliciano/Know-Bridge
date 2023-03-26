@@ -12,8 +12,9 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="sign-up" element={<SignUp />} />
-                <Route path="sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/user/:userName"></Route>
             </Routes>
         </BrowserRouter>
     );

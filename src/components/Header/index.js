@@ -17,10 +17,10 @@ export default function Header() {
                 <Legend>Disciplinas</Legend>
             </Middle>
             <Right>
-                <StyledLink>
+                <StyledLink to="/sign-in">
                     <Button>Entrar</Button>
                 </StyledLink>
-                <StyledLink>
+                <StyledLink to="/sign-up">
                     <Button>Cadastrar-se</Button>
                 </StyledLink>
             </Right>

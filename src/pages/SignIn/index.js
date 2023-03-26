@@ -10,7 +10,7 @@ import useSignIn from "../../hooks/api/useSignIn";
 
 export default function SignIn() {
     const [data, setData] = useState({ email: "", password: "" });
-    const { signInLoading, signIn, signInError } = useSignIn();
+    const { signInLoading, signIn } = useSignIn();
 
     const handleFormChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
 
@@ -52,7 +52,7 @@ export default function SignIn() {
                     Entrar
                 </Button>
                 <p>
-                    Não Possui uma conta? <Link to="sign-in">Cadastre-se</Link>
+                    Não Possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
                 </p>
             </Form>
         </AuthContainer>
