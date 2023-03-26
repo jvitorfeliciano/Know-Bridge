@@ -4,5 +4,5 @@ import UserContext from "../contexts/userContext";
 export default function useToken() {
     const { userData } = useContext(UserContext);
 
-    return userData.token;
+    return userData?.token;
 }
