@@ -1,11 +1,13 @@
 import styled from "styled-components";
+import colorDictionary from "../../constants/colors";
 
-export default function MainContainer({ children }) {
-    return <Container>{children}</Container>;
+export default function MainContainer({ children, column }) {
+    return <Container column={column}>{children}</Container>;
 }
 
 const Container = styled.main`
     width: 100vw;
     height: calc(100vh - 60px);
-    display:flex;
+    background: ${colorDictionary.lightGray};
+  
 `;

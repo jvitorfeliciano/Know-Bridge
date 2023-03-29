@@ -1,8 +1,9 @@
 import { Avatar } from "@mui/material";
 import styled from "styled-components";
+import Button from "../../components/Button";
 import colorDictionary from "../../constants/colors";
 
-export default function ContentBox() {
+export default function TrailBox() {
     return (
         <Container>
             <Top>
@@ -10,7 +11,7 @@ export default function ContentBox() {
                     <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                     <h2>Matemática</h2>
                 </TopLeft>
-                <TopRight></TopRight>
+                <Button>Matricular-se</Button>
             </Top>
             <Bottom>
                 <div>
@@ -40,7 +41,8 @@ export default function ContentBox() {
 const Container = styled.section`
     width: 580px;
     height: auto;
-    padding: 17px;
+    padding: 30px 100px;
+    margin-top: 16px;
     border: 1px solid rgba(33, 36, 44, 0.16);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 4px;
@@ -53,9 +55,6 @@ const Top = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-`;
-const TopRight = styled.div`
-    background: yellow;
 `;
 
 const TopLeft = styled.div`
@@ -71,6 +70,7 @@ const Bottom = styled.div`
     margin-top: 10px;
     width: 100%;
     display: flex;
+    justify-content: center;
     div {
         margin-right: 10px;
         word-wrap: break-word;
@@ -80,6 +80,7 @@ const Bottom = styled.div`
         margin-top: 30px;
     }
     h3 {
+        text-align: center;
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 14px;
