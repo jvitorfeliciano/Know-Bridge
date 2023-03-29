@@ -4,12 +4,15 @@ import styled from "styled-components";
 import Button from "../../components/Button";
 import colorDictionary from "../../constants/colors";
 import useCreateEnrollmentOnTrail from "../../hooks/api/useCreateEnrollmentOntrail";
+import useDeleteEnrollmentOnTrail from "../../hooks/api/useDeleteEnrollmentOntrail";
 import useToken from "../../hooks/useToken";
 
 export default function TrailBox({ trail }) {
     const token = useToken();
     const navigate = useNavigate();
     const { createEnrollmentLoading, createEnrollmentOnTrail } = useCreateEnrollmentOnTrail();
+    const { deleteEnrollmentLoading, deleteEnrollmentOnTrail } = useDeleteEnrollmentOnTrail();
+
     const middle = Math.floor(trail.fields.length / 2);
     const dataPartOne = trail.fields.slice(0, middle);
     const dataPartTwo = trail.fields.slice(middle);
@@ -22,7 +25,7 @@ export default function TrailBox({ trail }) {
 
         try {
             if (trail.isEnrolled) {
-                console.log("enrolled");
+                await deleteEnrollmentOnTrail(token, trailId);
             } else {
                 await createEnrollmentOnTrail(token, trailId);
             }
@@ -40,7 +43,7 @@ export default function TrailBox({ trail }) {
                 </TopLeft>
                 <Button
                     onClick={() => handleUserEnrollmentOnTrail(trail.id)}
-                    disabled={createEnrollmentLoading || false}
+                    disabled={createEnrollmentLoading || deleteEnrollmentLoading}
                 >
                     {trail?.isEnrolled ? "Desmatricular" : "Matricular"}
                 </Button>

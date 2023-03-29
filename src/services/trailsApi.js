@@ -8,12 +8,20 @@ async function getTrails(token) {
     return response.data;
 }
 
-async function createEnrollment(token, trailId){
-    const config =  createConfig(token);
+async function createEnrollment(token, trailId) {
+    const config = createConfig(token);
 
-    const response = await api.post(`/users/${trailId}`,{}, config);
+    const response = await api.post(`/trails/users/${trailId}`, {}, config);
 
     return response.data;
 }
 
-export { getTrails, createEnrollment };
+async function deleteEnrollment(token, trailId) {
+    const config = createConfig(token);
+
+    const response = await api.delete(`/trails/users/${trailId}`, config);
+
+    return response.data;
+}
+
+export { getTrails, createEnrollment, deleteEnrollment };
