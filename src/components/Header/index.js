@@ -18,7 +18,9 @@ export default function Header() {
             <Middle>
                 <Legend>Home</Legend>
                 <Legend>Sobre Nós</Legend>
-                <Legend>Trilhas</Legend>
+                <StyledLink to="/trails">
+                    <Legend>Trilhas</Legend>
+                </StyledLink>
                 <Legend>Disciplinas</Legend>
             </Middle>
             <Right>

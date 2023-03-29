@@ -7,6 +7,7 @@ import { UserProvider } from "./contexts/userContext";
 import HomePage from "./pages/HomePage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import TrailsPage from "./pages/TrailsPage";
 import UserPage from "./pages/UserPage";
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
                             </ProtectedRouteGuard>
                         }
                     />
+                    <Route path="/trails" element={<TrailsPage />} />
                 </Routes>
             </BrowserRouter>
         </UserProvider>
