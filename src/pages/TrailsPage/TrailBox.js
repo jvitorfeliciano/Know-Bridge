@@ -3,21 +3,32 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../components/Button";
 import colorDictionary from "../../constants/colors";
+import useCreateEnrollmentOnTrail from "../../hooks/api/useCreateEnrollmentOntrail";
 import useToken from "../../hooks/useToken";
 
 export default function TrailBox({ trail }) {
     const token = useToken();
     const navigate = useNavigate();
+    const { createEnrollmentLoading, createEnrollmentOnTrail } = useCreateEnrollmentOnTrail();
     const middle = Math.floor(trail.fields.length / 2);
     const dataPartOne = trail.fields.slice(0, middle);
     const dataPartTwo = trail.fields.slice(middle);
 
-    function handleUserEnrollmentOnTrail(trailId) {
+    async function handleUserEnrollmentOnTrail(trailId) {
         if (!token) {
             navigate("/sign-in");
             return;
         }
-       
+
+        try {
+            if (trail.isEnrolled) {
+                console.log("enrolled");
+            } else {
+                await createEnrollmentOnTrail(token, trailId);
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -27,7 +38,10 @@ export default function TrailBox({ trail }) {
                     <Avatar alt={trail.title} src={trail.image} />
                     <h2>{trail.title}</h2>
                 </TopLeft>
-                <Button onClick={() => handleUserEnrollmentOnTrail(trail.id)}>
+                <Button
+                    onClick={() => handleUserEnrollmentOnTrail(trail.id)}
+                    disabled={createEnrollmentLoading || false}
+                >
                     {trail?.isEnrolled ? "Desmatricular" : "Matricular"}
                 </Button>
             </Top>
