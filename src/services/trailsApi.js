@@ -8,4 +8,12 @@ async function getTrails(token) {
     return response.data;
 }
 
-export { getTrails };
+async function createEnrollment(token, trailId){
+    const config =  createConfig(token);
+
+    const response = await api.post(`/users/${trailId}`,{}, config);
+
+    return response.data;
+}
+
+export { getTrails, createEnrollment };

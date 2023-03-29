@@ -17,6 +17,7 @@ export default function TrailBox({ trail }) {
             navigate("/sign-in");
             return;
         }
+       
     }
 
     return (
