@@ -6,14 +6,15 @@ import TrailBox from "./TrailBox";
 
 export default function TrailsPage() {
     const { trailsLoading, trails } = useReadTrails();
-    console.log(trails);
 
     if (trailsLoading) {
         return <SkeletonLoading />;
     }
     return (
         <Container>
-            <TrailBox />
+            {trails.map((trail) => (
+                <TrailBox key={trail.id} trail={trail} />
+            ))}
         </Container>
     );
 }

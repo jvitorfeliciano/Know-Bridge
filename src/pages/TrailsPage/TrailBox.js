@@ -1,37 +1,45 @@
 import { Avatar } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../components/Button";
 import colorDictionary from "../../constants/colors";
+import useToken from "../../hooks/useToken";
 
-export default function TrailBox() {
+export default function TrailBox({ trail }) {
+    const token = useToken();
+    const navigate = useNavigate();
+    const middle = Math.floor(trail.fields.length / 2);
+    const dataPartOne = trail.fields.slice(0, middle);
+    const dataPartTwo = trail.fields.slice(middle);
+
+    function handleUserEnrollmentOnTrail(trailId) {
+        if (!token) {
+            navigate("/sign-in");
+            return;
+        }
+    }
+
     return (
         <Container>
             <Top>
                 <TopLeft>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    <h2>Matemática</h2>
+                    <Avatar alt={trail.title} src={trail.image} />
+                    <h2>{trail.title}</h2>
                 </TopLeft>
-                <Button>Matricular-se</Button>
+                <Button onClick={() => handleUserEnrollmentOnTrail(trail.id)}>
+                    {trail?.isEnrolled ? "Desmatricular" : "Matricular"}
+                </Button>
             </Top>
             <Bottom>
                 <div>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometriaa</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
+                    {dataPartOne.map((field) => (
+                        <h3 key={field.id}>{field.title}</h3>
+                    ))}
                 </div>
                 <div>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
-                    <h3>Trigonometria</h3>
+                    {dataPartTwo.map((field) => (
+                        <h3 key={field.id}>{field.title}</h3>
+                    ))}
                 </div>
             </Bottom>
         </Container>

@@ -7,6 +7,5 @@ export default function createConfig(token) {
                   },
               }
             : {};
-    console.log(config);
     return config;
 }
