@@ -24,4 +24,12 @@ async function deleteEnrollment(token, trailId) {
     return response.data;
 }
 
-export { getTrails, createEnrollment, deleteEnrollment };
+async function getTrailById(token, trailId) {
+    const config = createConfig(token);
+
+    const response = await api.get(`/trails/${trailId}`, config);
+
+    return response.data;
+}
+
+export { getTrails, createEnrollment, deleteEnrollment, getTrailById };
