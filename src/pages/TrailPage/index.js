@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import colorDictionary from "../../constants/colors";
 import FieldProgress from "./FieldProgress";
+import Unity from "./Unity";
 
 export default function TrailPage() {
     return (
@@ -13,7 +14,12 @@ export default function TrailPage() {
                 <FieldProgress />
             </TrailSummary>
             <Unities>
-                
+                <Unity />
+                <Unity />
+                <Unity />
+                <Unity />
+                <Unity />
+                <Unity />
             </Unities>
         </Container>
     );
@@ -48,4 +54,5 @@ const Title = styled.h2`
 const Unities = styled.section`
     width: 670px;
     height: auto;
+    margin-left: 80px;
 `;

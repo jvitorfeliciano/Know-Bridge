@@ -1,24 +1,12 @@
 import styled from "styled-components";
-import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
-import { styled as styledMui } from "@mui/material/styles";
+import ProgressBar from "./ProgressBar";
+
 
 export default function FieldProgress() {
-    const BorderLinearProgress = styledMui(LinearProgress)(({ theme }) => ({
-        height: 10,
-        borderRadius: 5,
-        [`&.${linearProgressClasses.colorPrimary}`]: {
-            backgroundColor: "#e6e7ea",
-        },
-        [`& .${linearProgressClasses.bar}`]: {
-            borderRadius: 5,
-            backgroundColor: "#00adbc",
-        },
-    }));
-
     return (
         <Field>
             <h3>Contando</h3>
-            <BorderLinearProgress variant="determinate" value={50} />
+            <ProgressBar />
         </Field>
     );
 }
