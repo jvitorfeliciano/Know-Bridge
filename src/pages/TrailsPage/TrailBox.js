@@ -1,4 +1,5 @@
 import { Avatar } from "@mui/material";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../components/Button";
@@ -12,8 +13,9 @@ export default function TrailBox({ trail }) {
     const navigate = useNavigate();
     const { createEnrollmentLoading, createEnrollmentOnTrail } = useCreateEnrollmentOnTrail();
     const { deleteEnrollmentLoading, deleteEnrollmentOnTrail } = useDeleteEnrollmentOnTrail();
+    const [isEnrolled, setIsEnrolled] = useState(trail?.isEnrolled);
 
-    const middle = Math.floor(trail.fields.length / 2);
+    const middle = Math.ceil(trail.fields.length / 2);
     const dataPartOne = trail.fields.slice(0, middle);
     const dataPartTwo = trail.fields.slice(middle);
 
@@ -24,10 +26,12 @@ export default function TrailBox({ trail }) {
         }
 
         try {
-            if (trail.isEnrolled) {
-                await deleteEnrollmentOnTrail(token, trailId);
+            if (isEnrolled) {
+                const data = await deleteEnrollmentOnTrail(token, trailId);
+                setIsEnrolled(data.isEnrolled);
             } else {
-                await createEnrollmentOnTrail(token, trailId);
+                const data = await createEnrollmentOnTrail(token, trailId);
+                setIsEnrolled(data.isEnrolled);
             }
         } catch (err) {
             console.log(err);
@@ -45,7 +49,7 @@ export default function TrailBox({ trail }) {
                     onClick={() => handleUserEnrollmentOnTrail(trail.id)}
                     disabled={createEnrollmentLoading || deleteEnrollmentLoading}
                 >
-                    {trail?.isEnrolled ? "Desmatricular" : "Matricular"}
+                    {isEnrolled ? "Desmatricular" : "Matricular"}
                 </Button>
             </Top>
             <Bottom>
@@ -86,7 +90,7 @@ const Top = styled.div`
 const TopLeft = styled.div`
     display: flex;
     align-items: center;
-
+    cursor: pointer;
     h2 {
         margin-left: 8px;
     }

@@ -7,6 +7,7 @@ import { UserProvider } from "./contexts/userContext";
 import HomePage from "./pages/HomePage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import TrailPage from "./pages/TrailPage";
 import TrailsPage from "./pages/TrailsPage";
 import UserPage from "./pages/UserPage";
 
@@ -50,6 +51,7 @@ function App() {
                         }
                     />
                     <Route path="/trails" element={<TrailsPage />} />
+                    <Route path="/trails/:trailId" element={<TrailPage />} />
                 </Routes>
             </BrowserRouter>
         </UserProvider>
