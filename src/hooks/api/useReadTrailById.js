@@ -5,7 +5,11 @@ import useToken from "../useToken";
 export default function useReadTrailById(trailId) {
     const token = useToken();
 
-    const { loading: trailLoading, error: trailError } = useAsync(() => trailsApi.getTrailById(token, trailId), true);
+    const {
+        loading: trailLoading,
+        error: trailError,
+        data: trail,
+    } = useAsync(() => trailsApi.getTrailById(token, trailId), true);
 
-    return { trailLoading, trailError };
+    return { trailLoading, trailError, trail };
 }

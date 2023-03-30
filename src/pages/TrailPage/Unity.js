@@ -3,17 +3,20 @@ import styled from "styled-components";
 import colorDictionary from "../../constants/colors";
 import ProgressBar from "./ProgressBar";
 
-export default function Unity() {
+export default function Unity({ field }) {
+    console.log(field);
     return (
         <Container>
             <Top>
                 <TopLeft>
                     <Avatar alt="he" src="oie" />
-                    <h2>Unidade 1: contando</h2>
+                    <h2>
+                        Unidade {field.unitNumber}: {field.title}
+                    </h2>
                 </TopLeft>
                 <TopRight>
                     <p>0% concluído</p>
-                    <ProgressBar />
+                    <ProgressBar progress={0} />
                 </TopRight>
             </Top>
             <Bottom>

@@ -1,25 +1,31 @@
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import SkeletonLoading from "../../components/SkeletionLoading/SkeletonLoading";
 import colorDictionary from "../../constants/colors";
+import useReadTrailById from "../../hooks/api/useReadTrailById";
 import FieldProgress from "./FieldProgress";
 import Unity from "./Unity";
 
 export default function TrailPage() {
+    const { trailId } = useParams();
+    const { trailLoading, trail } = useReadTrailById(trailId);
+
+    if (trailLoading) {
+        return <SkeletonLoading />;
+    }
+
     return (
         <Container>
             <TrailSummary>
                 <Title>Resumo do curso</Title>
-                <FieldProgress />
-                <FieldProgress />
-                <FieldProgress />
-                <FieldProgress />
+                {trail.fields.map((field) => (
+                    <FieldProgress key={field.id} field={field} />
+                ))}
             </TrailSummary>
             <Unities>
-                <Unity />
-                <Unity />
-                <Unity />
-                <Unity />
-                <Unity />
-                <Unity />
+                {trail.fields.map((field) => (
+                    <Unity key={field.id} field={field} />
+                ))}
             </Unities>
         </Container>
     );

@@ -1,7 +1,7 @@
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import { styled as styledMui } from "@mui/material/styles";
 
-export default function ProgressBar() {
+export default function ProgressBar({ progress }) {
     const BorderLinearProgress = styledMui(LinearProgress)(({ theme }) => ({
         height: 10,
         borderRadius: 5,
@@ -14,5 +14,5 @@ export default function ProgressBar() {
         },
     }));
 
-    return <BorderLinearProgress variant="determinate" value={50} />;
+    return <BorderLinearProgress variant="determinate" value={progress} />;
 }
