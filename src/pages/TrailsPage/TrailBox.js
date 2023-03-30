@@ -38,10 +38,14 @@ export default function TrailBox({ trail }) {
         }
     }
 
+    function navigateToTrailPage(trailId) {
+        navigate(`/trails/${trailId}`);
+    }
+
     return (
         <Container>
             <Top>
-                <TopLeft>
+                <TopLeft onClick={() => navigateToTrailPage(trail.id)}>
                     <Avatar alt={trail.title} src={trail.image} />
                     <h2>{trail.title}</h2>
                 </TopLeft>
