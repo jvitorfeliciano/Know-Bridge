@@ -4,7 +4,10 @@ import colorDictionary from "../../constants/colors";
 import ProgressBar from "./ProgressBar";
 
 export default function Unity({ field }) {
-    console.log(field);
+    const middle = Math.ceil(field.subfields.length / 2);
+    const dataPartOne = field.subfields.slice(0, middle);
+    const dataPartTwo = field.subfields.slice(middle);
+
     return (
         <Container>
             <Top>
@@ -21,10 +24,14 @@ export default function Unity({ field }) {
             </Top>
             <Bottom>
                 <div>
-                    <h3>Cálculo do seno</h3>
+                    {dataPartOne.map((subfield) => (
+                        <h3>{subfield.title}</h3>
+                    ))}
                 </div>
                 <div>
-                    <h3>Cálculo do cosseno</h3>
+                    {dataPartTwo.map((subfield) => (
+                        <h3>{subfield.title}</h3>
+                    ))}
                 </div>
             </Bottom>
         </Container>
