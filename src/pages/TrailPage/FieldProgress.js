@@ -5,7 +5,7 @@ export default function FieldProgress({ field }) {
     return (
         <Field>
             <h3>{field.title}</h3>
-            <ProgressBar progress={0} />
+            <ProgressBar progress={field.progressPercentage} />
         </Field>
     );
 }

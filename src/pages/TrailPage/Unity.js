@@ -12,25 +12,25 @@ export default function Unity({ field }) {
         <Container>
             <Top>
                 <TopLeft>
-                    <Avatar alt="he" src="oie" />
+                    <Avatar alt={field.title} src={field.image} />
                     <h2>
                         Unidade {field.unitNumber}: {field.title}
                     </h2>
                 </TopLeft>
                 <TopRight>
-                    <p>0% concluído</p>
-                    <ProgressBar progress={0} />
+                    <p>{field.progressPercentage ? field.progressPercentage : 0} % concluído</p>
+                    <ProgressBar progress={field.progressPercentage} />
                 </TopRight>
             </Top>
             <Bottom>
                 <div>
                     {dataPartOne.map((subfield) => (
-                        <h3>{subfield.title}</h3>
+                        <h3 key={subfield.id}>{subfield.title}</h3>
                     ))}
                 </div>
                 <div>
                     {dataPartTwo.map((subfield) => (
-                        <h3>{subfield.title}</h3>
+                        <h3 key={subfield.id}>{subfield.title}</h3>
                     ))}
                 </div>
             </Bottom>

@@ -14,5 +14,5 @@ export default function ProgressBar({ progress }) {
         },
     }));
 
-    return <BorderLinearProgress variant="determinate" value={progress} />;
+    return <BorderLinearProgress variant="determinate" value={progress ? progress : 0} />;
 }
