@@ -1,8 +1,8 @@
 import { Avatar } from "@mui/material";
 import styled from "styled-components";
 import colorDictionary from "../../constants/colors";
-import ProgressBar from "./ProgressBar";
 import { useNavigate } from "react-router-dom";
+import ProgressBar from "../../components/ProgressBar";
 
 export default function Unity({ field }) {
     const navigate = useNavigate();

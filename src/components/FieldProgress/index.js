@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import ProgressBar from "./ProgressBar";
+import ProgressBar from "../ProgressBar";
 
-export default function FieldProgress({ field }) {
+export default function FieldProgress({ data }) {
     return (
         <Field>
-            <h3>{field.title}</h3>
-            <ProgressBar progress={field.progressPercentage} />
+            <h3>{data.title}</h3>
+            <ProgressBar progress={data.progressPercentage} />
         </Field>
     );
 }
