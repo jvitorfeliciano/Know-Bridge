@@ -2,11 +2,22 @@ import styled from "styled-components";
 import colorDictionary from "../../constants/colors";
 import MaterialDescription from "../../components/MateriaLDescription";
 
-export default function Subfield() {
+export default function Subfield({ subfield }) {
+    console.log(subfield);
     return (
         <Container>
-            <Title>Contando</Title>
-            <MaterialDescription />
+            <Title>{subfield.title}</Title>
+            {subfield.videos.map((video) => (
+                <div key={video.id}>
+                    <MaterialDescription data={video} />
+                    {video.questions.map((question) => (
+                        <MaterialDescription data={question} key={question.id} />
+                    ))}
+                    {video.articles.map((article) => (
+                        <MaterialDescription data={article} key={article.id} />
+                    ))}
+                </div>
+            ))}
         </Container>
     );
 }

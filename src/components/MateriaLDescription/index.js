@@ -14,7 +14,6 @@ export default function MaterialDescription({ data }) {
 const Container = styled.div`
     width: 100%;
     height: 40px;
-    margin-bottom: 20px;
     display: flex;
     align-items: center;
 

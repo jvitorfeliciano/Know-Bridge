@@ -1,5 +1,5 @@
 import useAsync from "../useAsync";
-import * as trailsApi from "../../services/trailsApi";
+import * as fieldsApi from "../../services/fieldsApi";
 import useToken from "../useToken";
 
 export default function useReadFieldById(fieldId) {
@@ -9,7 +9,7 @@ export default function useReadFieldById(fieldId) {
         loading: fieldLoading,
         error: fieldError,
         data: field,
-    } = useAsync(() => trailsApi.getTrailById(token, fieldId), true);
+    } = useAsync(() => fieldsApi.getFieldById(token, fieldId), true);
 
     return { fieldLoading, fieldError, field };
 }
