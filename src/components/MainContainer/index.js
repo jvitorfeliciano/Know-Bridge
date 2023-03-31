@@ -9,5 +9,6 @@ const Container = styled.main`
     width: 100vw;
     height: calc(100vh - 60px);
     background: ${colorDictionary.lightGray};
-  
+    display: flex;
+    justify-content: center;
 `;
