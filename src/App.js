@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 import TrailPage from "./pages/TrailPage";
 import TrailsPage from "./pages/TrailsPage";
 import UserPage from "./pages/UserPage";
+import UnityPage from "./pages/UnityPage";
 
 function App() {
     return (
@@ -52,6 +53,7 @@ function App() {
                     />
                     <Route path="/trails" element={<TrailsPage />} />
                     <Route path="/trails/:trailId" element={<TrailPage />} />
+                    <Route path="/unity/:unityId" element={<UnityPage />} />
                 </Routes>
             </BrowserRouter>
         </UserProvider>

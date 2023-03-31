@@ -2,8 +2,11 @@ import { Avatar } from "@mui/material";
 import styled from "styled-components";
 import colorDictionary from "../../constants/colors";
 import ProgressBar from "./ProgressBar";
+import { useNavigate } from "react-router-dom";
 
 export default function Unity({ field }) {
+    const navigate = useNavigate();
+
     const middle = Math.ceil(field.subfields.length / 2);
     const dataPartOne = field.subfields.slice(0, middle);
     const dataPartTwo = field.subfields.slice(middle);
@@ -11,7 +14,7 @@ export default function Unity({ field }) {
     return (
         <Container>
             <Top>
-                <TopLeft>
+                <TopLeft onClick={() => navigate(`/unity/${field.id}`)}>
                     <Avatar alt={field.title} src={field.image} />
                     <h2>
                         Unidade {field.unitNumber}: {field.title}
