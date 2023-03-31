@@ -3,7 +3,6 @@ import colorDictionary from "../../constants/colors";
 import MaterialDescription from "../../components/MateriaLDescription";
 
 export default function Subfield({ subfield }) {
-    console.log(subfield);
     return (
         <Container>
             <Title>{subfield.title}</Title>

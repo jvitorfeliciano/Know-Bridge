@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
-import { BsPlayBtn } from "react-icons/bs";
+import { BsPlayBtn, BsPuzzle, BsBook } from "react-icons/bs";
 
 export default function MaterialDescription({ data }) {
     return (
         <Container>
-            <BsPlayBtn />
-            <h3>Como calcular a hipotenusa</h3>
+            {data.type === "VIDEO" && <BsPlayBtn />}
+            {data.type === "QUESTION" && <BsPuzzle />}
+            {data.type === "ARTICLE" && <BsBook />}
+            <h3>{data.title}</h3>
         </Container>
     );
 }
