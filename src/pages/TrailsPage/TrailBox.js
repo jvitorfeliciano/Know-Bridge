@@ -96,7 +96,12 @@ const TopLeft = styled.div`
     align-items: center;
     cursor: pointer;
     h2 {
+        font-family: "Inter", sans-serif;
         margin-left: 8px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        color: ${colorDictionary.gray};
     }
 `;
 

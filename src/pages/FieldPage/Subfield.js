@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import colorDictionary from "../../constants/colors";
 import MaterialDescription from "../../components/MateriaLDescription";
+import { useNavigate } from "react-router-dom";
 
 export default function Subfield({ subfield }) {
+    const navigate = useNavigate();
+
     return (
         <Container>
-            <Title>{subfield.title}</Title>
+            <Title onClick={() => navigate(`/materials/${subfield.id}`)}>{subfield.title}</Title>
             {subfield.videos.map((video) => (
                 <div key={video.id}>
                     <MaterialDescription data={video} />
@@ -39,4 +42,5 @@ const Title = styled.div`
     font-size: 20px;
     line-height: 24px;
     margin-bottom: 25px;
+    cursor: pointer;
 `;

@@ -5,11 +5,9 @@ import styled from "styled-components";
 import useReadFieldById from "../../hooks/api/useReadFieldById";
 import SkeletonLoading from "../../components/SkeletionLoading/SkeletonLoading";
 
-export default function UnityPage() {
+export default function FieldPage() {
     const { unityId } = useParams();
     const { fieldLoading, field } = useReadFieldById(unityId);
-
-    console.log(field);
 
     if (fieldLoading) {
         return <SkeletonLoading />;

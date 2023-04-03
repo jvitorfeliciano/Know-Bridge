@@ -42,7 +42,7 @@ export default function Unity({ field }) {
 }
 
 const Container = styled.section`
-    width:100%;
+    width: 100%;
     height: auto;
     padding: 18px;
     margin-top: 16px;
@@ -64,9 +64,11 @@ const Top = styled.div`
 `;
 
 const TopLeft = styled.div`
+    width: 445px;
     display: flex;
     align-items: center;
     cursor: pointer;
+    margin-right: 30px;
     h2 {
         margin-left: 8px;
         font-weight: 700;
