@@ -5,6 +5,8 @@ const colorDictionary = {
     gray: "#444444",
     lightGray: "#F7F8FA",
     brightGray: " #EEEEEE",
+    lightBlue: "#edf3fe",
+    blue: "#1865f2",
 };
 
 export default colorDictionary;

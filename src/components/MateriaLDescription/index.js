@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { BsPlayBtn, BsPuzzle, BsBook } from "react-icons/bs";
 import colorDictionary from "../../constants/colors";
 
-export default function MaterialDescription({ data }) {
+export default function MaterialDescription({ data, ...props }) {
     return (
-        <Container>
+        <Container {...props} data={data}>
             {data.type === "VIDEO" && <BsPlayBtn />}
             {data.type === "QUESTION" && <BsPuzzle />}
             {data.type === "ARTICLE" && <BsBook />}
@@ -26,10 +26,18 @@ const Container = styled.div`
     line-height: 20px;
     color: ${colorDictionary.gray};
     padding: 16px 0px 16px 16px;
-    :hover {
+    /*    :hover {
         background-color: ${colorDictionary.brightGray};
         border-left: 2px solid ${colorDictionary.gray};
-    }
+    } */
+    background-color: ${(props) =>
+        props.displayedMaterial?.id === props.data.id && props.displayedMaterial?.type === props.data.type
+            ? colorDictionary.lightBlue
+            : ""};
+    border-left: ${(props) =>
+        props.displayedMaterial?.id === props.data.id && props.displayedMaterial?.type === props.data.type
+            ? `2px solid ${colorDictionary.blue}`
+            : ""};
     h3 {
         margin: 0 16px;
     }
