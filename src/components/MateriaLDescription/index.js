@@ -26,10 +26,6 @@ const Container = styled.div`
     line-height: 20px;
     color: ${colorDictionary.gray};
     padding: 16px 0px 16px 16px;
-    /*    :hover {
-        background-color: ${colorDictionary.brightGray};
-        border-left: 2px solid ${colorDictionary.gray};
-    } */
     background-color: ${(props) =>
         props.displayedMaterial?.id === props.data.id && props.displayedMaterial?.type === props.data.type
             ? colorDictionary.lightBlue

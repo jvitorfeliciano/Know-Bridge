@@ -3,10 +3,10 @@ import styled from "styled-components";
 import SkeletonLoading from "../../components/SkeletionLoading/SkeletonLoading";
 import colorDictionary from "../../constants/colors";
 import useReadSubfieldById from "../../hooks/api/useReadSubfieldById";
-import MaterialDescription from "../../components/MateriaLDescription";
 import { useState } from "react";
 import Video from "./Video";
 import MaterialsSummary from "./MaterialSummary";
+import Question from "./Question";
 
 export default function MaterialsPage() {
     const { subfieldId } = useParams();
@@ -27,7 +27,8 @@ export default function MaterialsPage() {
             />
             <DisplayedMaterial>
                 <Title>Contando com números pequenos</Title>
-                <Video data={displayedMaterial} />
+                {/* <Video data={displayedMaterial} /> */}
+                <Question />
             </DisplayedMaterial>
         </Container>
     );
@@ -47,6 +48,7 @@ const DisplayedMaterial = styled.section`
     background-color: ${colorDictionary.white};
     overflow-y: auto;
     display: flex;
+    padding: 24px;
     flex-direction: column;
     align-items: center;
     border-left: 1px solid rgba(33, 36, 44, 0.16);
@@ -59,6 +61,5 @@ const Title = styled.h1`
     font-size: 28px;
     line-height: 32px;
     color: #21242c;
-    margin-top: 24px;
     margin-bottom: 54px;
 `;
