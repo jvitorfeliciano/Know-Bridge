@@ -7,7 +7,6 @@ export default function useAsync(handler, immediate = true) {
 
     const act = async (...args) => {
         setLoading(true);
-
         try {
             const data = await handler(...args);
             setData(data);
