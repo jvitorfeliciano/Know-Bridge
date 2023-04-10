@@ -77,6 +77,7 @@ const Container = styled.section`
     height: auto;
     padding: 30px 100px;
     margin-top: 16px;
+    background-color: ${colorDictionary.white};
     border: 1px solid rgba(33, 36, 44, 0.16);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 4px;
@@ -96,7 +97,12 @@ const TopLeft = styled.div`
     align-items: center;
     cursor: pointer;
     h2 {
+        font-family: "Inter", sans-serif;
         margin-left: 8px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        color: ${colorDictionary.gray};
     }
 `;
 

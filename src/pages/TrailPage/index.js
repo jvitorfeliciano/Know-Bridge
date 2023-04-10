@@ -3,8 +3,8 @@ import styled from "styled-components";
 import SkeletonLoading from "../../components/SkeletionLoading/SkeletonLoading";
 import colorDictionary from "../../constants/colors";
 import useReadTrailById from "../../hooks/api/useReadTrailById";
-import FieldProgress from "./FieldProgress";
 import Unity from "./Unity";
+import FieldProgress from "../../components/FieldProgress";
 
 export default function TrailPage() {
     const { trailId } = useParams();
@@ -19,7 +19,7 @@ export default function TrailPage() {
             <TrailSummary>
                 <Title>Resumo do curso</Title>
                 {trail.fields.map((field) => (
-                    <FieldProgress key={field.id} field={field} />
+                    <FieldProgress key={field.id} data={field} />
                 ))}
             </TrailSummary>
             <Unities>
