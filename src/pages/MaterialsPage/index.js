@@ -17,7 +17,6 @@ export default function MaterialsPage() {
         return <SkeletonLoading />;
     }
 
-    console.log(displayedMaterial);
     return (
         <Container>
             <MaterialsSummary
@@ -26,9 +25,9 @@ export default function MaterialsPage() {
                 displayedMaterial={displayedMaterial}
             />
             <DisplayedMaterial>
-                <Title>Contando com números pequenos</Title>
-                {/* <Video data={displayedMaterial} /> */}
-                <Question />
+                <Title>{displayedMaterial?.title}</Title>
+                {displayedMaterial?.type === "VIDEO" && <Video data={displayedMaterial} />}
+                {displayedMaterial?.type === "QUESTION" && <Question data={displayedMaterial} />}
             </DisplayedMaterial>
         </Container>
     );

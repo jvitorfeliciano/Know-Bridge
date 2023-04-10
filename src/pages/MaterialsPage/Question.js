@@ -8,56 +8,57 @@ import FormLabel from "@mui/material/FormLabel";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import Button from "../../components/Button";
+import usePostQuestionAnswer from "../../hooks/api/usePostQuestionAnswer";
+import useToken from "../../hooks/useToken";
 
-export default function Question() {
+export default function Question({ data }) {
+    const { questionAnswerLoading, postQuestionAnswer } = usePostQuestionAnswer();
     const [answer, setAnswer] = useState();
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState();
-
+    const token = useToken();
     const handleRadioChange = (event) => setAnswer(event.target.value);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (answer === "best") {
-            setHelperText("Você acertou!");
-            setError(false);
-        } else if (answer === "worst") {
-            setHelperText("Resposta Incorreta!");
-            setError(true);
-        } else {
+        if (!answer) {
             setHelperText("Escolha uma opção");
+            setError(true);
+            return;
+        }
+        try {
+            const data = await postQuestionAnswer(token, answer);
+            setHelperText(data.message);
+            setError(false);
+        } catch (err) {
+            setHelperText(err.response.data.errors);
             setError(true);
         }
     };
 
     return (
         <Container>
-            <p>AAAA viagem é importante</p>
+            <p>{data.statement}</p>
 
             <form onSubmit={handleSubmit}>
-                <FormControl error={error} variant="standard" sx={{ width: "100%" }} onSubmit={handleSubmit}>
+                <FormControl error={error} variant="standard" sx={{ width: "100%" }}>
                     <FormLabel id="demo-error-radios" sx={{ marginBottom: "10px" }}>
                         Escolha uma resposta:
                     </FormLabel>
-                    <RadioGroup
-                        aria-labelledby="demo-error-radios"
-                        name="quiz"
-                        onChange={handleRadioChange}
-                        value={answer}
-                    >
-                        <Divider />
-                        <FormControlLabel value="best" control={<Radio />} label="The best!" />
-                        <Divider />
-                        <FormControlLabel value="worst" control={<Radio />} label="The worst." />
-                        <Divider />
-                        <FormControlLabel value="worst" control={<Radio />} label="The worst." />
-                        <Divider />
-                        <FormControlLabel value="worst" control={<Radio />} label="The worst." />
-                        <Divider />
+                    <RadioGroup aria-labelledby="demo-error-radios" name="quiz" onChange={handleRadioChange}>
+                        {data.answers.map((answer) => (
+                            <div key={answer.id}>
+                                <Divider />
+                                <FormControlLabel value={answer.id} control={<Radio />} label={answer.answer} />
+                                <Divider />
+                            </div>
+                        ))}
                     </RadioGroup>
                     <FormHelperText>{helperText}</FormHelperText>
-                    <Button type="submit">Chechar Resposta</Button>
+                    <Button type="submit" disabled={questionAnswerLoading}>
+                        Chechar Resposta
+                    </Button>
                 </FormControl>
             </form>
         </Container>
