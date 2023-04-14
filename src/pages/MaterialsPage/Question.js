@@ -10,12 +10,15 @@ import { useState } from "react";
 import Button from "../../components/Button";
 import usePostQuestionAnswer from "../../hooks/api/usePostQuestionAnswer";
 import useToken from "../../hooks/useToken";
+import GradingIcon from "@mui/icons-material/Grading";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 
 export default function Question({ data }) {
     const { questionAnswerLoading, postQuestionAnswer } = usePostQuestionAnswer();
     const [answer, setAnswer] = useState();
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState();
+    const [isDone, setIsDone] = useState(data.isDone);
     const token = useToken();
     const handleRadioChange = (event) => setAnswer(event.target.value);
 
@@ -56,9 +59,13 @@ export default function Question({ data }) {
                         ))}
                     </RadioGroup>
                     <FormHelperText>{helperText}</FormHelperText>
-                    <Button type="submit" disabled={questionAnswerLoading}>
-                        Chechar Resposta
-                    </Button>
+                    {isDone ? (
+                        <DoneAllIcon sx={{ position: "absolute", right: 0, bottom: "-20px" }} color="primary" />
+                    ) : (
+                        <Button type="submit" disabled={questionAnswerLoading}>
+                            Chechar Resposta
+                        </Button>
+                    )}
                 </FormControl>
             </form>
         </Container>

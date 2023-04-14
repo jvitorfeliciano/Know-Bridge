@@ -2,6 +2,9 @@ import styled from "styled-components";
 import colorDictionary from "../../constants/colors";
 import MaterialDescription from "../../components/MateriaLDescription";
 import { useNavigate } from "react-router-dom";
+import { QuestionBadge } from "../../components/QuestionBadge";
+import VideoBagde from "../../components/VideoBadge";
+import ArticleBagde from "../../components/ArticleBadge";
 
 export default function Subfield({ subfield }) {
     const navigate = useNavigate();
@@ -11,12 +14,13 @@ export default function Subfield({ subfield }) {
             <Title onClick={() => navigate(`/materials/${subfield.id}`)}>{subfield.title}</Title>
             {subfield.videos.map((video) => (
                 <div key={video.id}>
-                    <MaterialDescription data={video} />
-                    {video.questions.map((question) => (
-                        <MaterialDescription data={question} key={question.id} />
-                    ))}
+                    {<VideoBagde data={video} />}
+
                     {video.articles.map((article) => (
-                        <MaterialDescription data={article} key={article.id} />
+                        <ArticleBagde data={article} key={article.id} />
+                    ))}
+                    {video.questions.map((question) => (
+                        <QuestionBadge data={question} key={question.id} />
                     ))}
                 </div>
             ))}
