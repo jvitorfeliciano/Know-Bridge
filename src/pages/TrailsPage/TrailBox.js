@@ -9,6 +9,7 @@ import useDeleteEnrollmentOnTrail from "../../hooks/api/useDeleteEnrollmentOntra
 import useToken from "../../hooks/useToken";
 
 export default function TrailBox({ trail }) {
+    console.log(trail);
     const token = useToken();
     const navigate = useNavigate();
     const { createEnrollmentLoading, createEnrollmentOnTrail } = useCreateEnrollmentOnTrail();
@@ -42,6 +43,10 @@ export default function TrailBox({ trail }) {
         navigate(`/trails/${trailId}`);
     }
 
+    function navigateToFieldPage(fieldId) {
+        navigate(`/field/${fieldId}`);
+    }
+
     return (
         <Container>
             <Top>
@@ -59,12 +64,16 @@ export default function TrailBox({ trail }) {
             <Bottom>
                 <div>
                     {dataPartOne.map((field) => (
-                        <h3 key={field.id}>{field.title}</h3>
+                        <h3 key={field.id} onClick={() => navigateToFieldPage(field.id)}>
+                            {field.title}
+                        </h3>
                     ))}
                 </div>
                 <div>
                     {dataPartTwo.map((field) => (
-                        <h3 key={field.id}>{field.title}</h3>
+                        <h3 key={field.id} onClick={() => navigateToFieldPage(field.id)}>
+                            {field.title}
+                        </h3>
                     ))}
                 </div>
             </Bottom>
@@ -75,7 +84,7 @@ export default function TrailBox({ trail }) {
 const Container = styled.section`
     width: 580px;
     height: auto;
-    padding: 30px 100px;
+    padding: 30px;
     margin-top: 16px;
     background-color: ${colorDictionary.white};
     border: 1px solid rgba(33, 36, 44, 0.16);
@@ -112,6 +121,7 @@ const Bottom = styled.div`
     display: flex;
     justify-content: center;
     div {
+        width: 50%;
         margin-right: 10px;
         word-wrap: break-word;
         width: 50%;
@@ -126,5 +136,9 @@ const Bottom = styled.div`
         font-size: 14px;
         line-height: 18px;
         color: ${colorDictionary.gray};
+        cursor: pointer;
+        :hover {
+            text-decoration: underline;
+        }
     }
 `;

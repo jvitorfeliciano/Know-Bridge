@@ -10,7 +10,6 @@ import { useState } from "react";
 import Button from "../../components/Button";
 import usePostQuestionAnswer from "../../hooks/api/usePostQuestionAnswer";
 import useToken from "../../hooks/useToken";
-import GradingIcon from "@mui/icons-material/Grading";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 
 export default function Question({ data }) {

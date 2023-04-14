@@ -6,8 +6,8 @@ import useReadFieldById from "../../hooks/api/useReadFieldById";
 import SkeletonLoading from "../../components/SkeletionLoading/SkeletonLoading";
 
 export default function FieldPage() {
-    const { unityId } = useParams();
-    const { fieldLoading, field } = useReadFieldById(unityId);
+    const { fieldId } = useParams();
+    const { fieldLoading, field } = useReadFieldById(fieldId);
 
     if (fieldLoading) {
         return <SkeletonLoading />;
