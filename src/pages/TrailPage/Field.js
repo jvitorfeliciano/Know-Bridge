@@ -4,7 +4,7 @@ import colorDictionary from "../../constants/colors";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../../components/ProgressBar";
 
-export default function Unity({ field }) {
+export default function Field({ field }) {
     const navigate = useNavigate();
 
     const middle = Math.ceil(field.subfields.length / 2);
@@ -14,7 +14,7 @@ export default function Unity({ field }) {
     return (
         <Container>
             <Top>
-                <TopLeft onClick={() => navigate(`/unity/${field.id}`)}>
+                <TopLeft onClick={() => navigate(`/field/${field.id}`)}>
                     <Avatar alt={field.title} src={field.image} />
                     <h2>
                         Unidade {field.unitNumber}: {field.title}
@@ -65,11 +65,11 @@ const Top = styled.div`
 `;
 
 const TopLeft = styled.div`
-    width: 445px;
+    width: 70%;
     display: flex;
     align-items: center;
-    cursor: pointer;
     margin-right: 30px;
+    cursor: pointer;
     h2 {
         margin-left: 8px;
         font-weight: 700;
@@ -78,7 +78,7 @@ const TopLeft = styled.div`
     }
 `;
 const TopRight = styled.div`
-    width: 200px;
+    width: 30%;
     p {
         text-align: end;
         margin-bottom: 4px;
@@ -95,17 +95,22 @@ const Bottom = styled.div`
     display: flex;
     justify-content: center;
     div {
-        margin-right: 10px;
-        word-wrap: break-word;
         width: 50%;
+        margin-top: 10px;
+        word-wrap: break-word;
     }
     div > *:not(:first-child) {
-        margin-top: 30px;
+        margin-right: 10px;
     }
     h3 {
+        margin-bottom: 5px;
         text-align: center;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
+        cursor: pointer;
+        :hover {
+            text-decoration: underline;
+        }
     }
 `;

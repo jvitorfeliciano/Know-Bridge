@@ -8,19 +8,38 @@ import ArticleBagde from "../../components/ArticleBadge";
 
 export default function Subfield({ subfield }) {
     const navigate = useNavigate();
+ 
+    const navigateToMaterialsPage = (subfieldId, type, adress) => {
+        navigate(`/materials/${subfieldId}/type/${type}/adress/${adress}`);
+    };
 
     return (
         <Container>
-            <Title onClick={() => navigate(`/materials/${subfield.id}`)}>{subfield.title}</Title>
+            <Title onClick={() => navigateToMaterialsPage(subfield.id, subfield.videos[0].type, subfield.videos[0].id)}>
+                {subfield.title}
+            </Title>
             {subfield.videos.map((video) => (
                 <div key={video.id}>
-                    {<VideoBagde data={video} />}
+                    {
+                        <VideoBagde
+                            data={video}
+                            onClick={() => navigateToMaterialsPage(subfield.id, video.type, video.id)}
+                        />
+                    }
 
                     {video.articles.map((article) => (
-                        <ArticleBagde data={article} key={article.id} />
+                        <ArticleBagde
+                            data={article}
+                            key={article.id}
+                            onClick={() => navigateToMaterialsPage(subfield.id, article.type, article.id)}
+                        />
                     ))}
                     {video.questions.map((question) => (
-                        <QuestionBadge data={question} key={question.id} />
+                        <QuestionBadge
+                            data={question}
+                            key={question.id}
+                            onClick={() => navigateToMaterialsPage(subfield.id, question.type, question.id)}
+                        />
                     ))}
                 </div>
             ))}

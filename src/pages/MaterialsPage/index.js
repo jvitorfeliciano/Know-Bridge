@@ -2,32 +2,71 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import SkeletonLoading from "../../components/SkeletionLoading/SkeletonLoading";
 import colorDictionary from "../../constants/colors";
-import useReadSubfieldById from "../../hooks/api/useReadSubfieldById";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Video from "./Video";
 import MaterialsSummary from "./MaterialSummary";
 import Question from "./Question";
+import useToken from "../../hooks/useToken";
+import * as subfieldsApi from "../../services/subfieldsApi";
 
 export default function MaterialsPage() {
-    const { subfieldId } = useParams();
-    const { subfieldLoading, subfield } = useReadSubfieldById(subfieldId);
+    const { subfieldId, type, adressId } = useParams();
+    const [loading, setLoading] = useState(true);
+    const [update, setUpdate] = useState(false);
+    const [data, setData] = useState(null);
     const [displayedMaterial, setDisplayedMaterial] = useState(null);
+    const token = useToken();
+    console.log(displayedMaterial);
 
-    if (subfieldLoading) {
+    useEffect(() => {
+        const getMaterials = async () => {
+            try {
+                const response = await subfieldsApi.getSubfieldById(token, subfieldId);
+                setData(response);
+                setLoading(false);
+            } catch (err) {
+                console.log(err);
+                setLoading(false);
+            }
+        };
+        getMaterials();
+    }, [update, subfieldId]);
+
+    useEffect(() => {
+        if (data) {
+            if (type === "VIDEO") {
+                data.videos.forEach((video) => {
+                    if (Number(adressId) === video.id) {
+                        setDisplayedMaterial(video);
+                    }
+                });
+            } else if (type === "QUESTION") {
+                data.videos.forEach((video) =>
+                    video.questions.forEach((question) => {
+                        if (Number(adressId) === question.id) {
+                            setDisplayedMaterial(question);
+                        }
+                    })
+                );
+            }
+        }
+    }, [data, type, adressId]);
+
+    if (loading) {
         return <SkeletonLoading />;
     }
 
     return (
         <Container>
             <MaterialsSummary
-                subfield={subfield}
+                subfield={data}
                 setDisplayedMaterial={setDisplayedMaterial}
                 displayedMaterial={displayedMaterial}
             />
             <DisplayedMaterial>
                 <Title>{displayedMaterial?.title}</Title>
                 {displayedMaterial?.type === "VIDEO" && <Video data={displayedMaterial} />}
-                {displayedMaterial?.type === "QUESTION" && <Question data={displayedMaterial} />}
+                {displayedMaterial?.type === "QUESTION" && <Question data={displayedMaterial} setUpdate={setUpdate} />}
             </DisplayedMaterial>
         </Container>
     );

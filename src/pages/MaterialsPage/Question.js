@@ -6,20 +6,26 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormLabel from "@mui/material/FormLabel";
 import Divider from "@mui/material/Divider";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../components/Button";
 import usePostQuestionAnswer from "../../hooks/api/usePostQuestionAnswer";
 import useToken from "../../hooks/useToken";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 
-export default function Question({ data }) {
+export default function Question({ data, setUpdate }) {
     const { questionAnswerLoading, postQuestionAnswer } = usePostQuestionAnswer();
-    const [answer, setAnswer] = useState();
+    const [isDone, setIsDone] = useState(data.isDone);
+    const [answer, setAnswer] = useState("");
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState();
-    const [isDone, setIsDone] = useState(data.isDone);
     const token = useToken();
     const handleRadioChange = (event) => setAnswer(event.target.value);
+
+    useEffect(() => {
+        setAnswer(undefined);
+        setHelperText(undefined);
+        setError(false);
+    }, [data]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -33,6 +39,8 @@ export default function Question({ data }) {
             const data = await postQuestionAnswer(token, answer);
             setHelperText(data.message);
             setError(false);
+            setUpdate((prev) => setUpdate(!prev));
+            setIsDone(true);
         } catch (err) {
             setHelperText(err.response.data.errors);
             setError(true);
@@ -48,7 +56,12 @@ export default function Question({ data }) {
                     <FormLabel id="demo-error-radios" sx={{ marginBottom: "10px" }}>
                         Escolha uma resposta:
                     </FormLabel>
-                    <RadioGroup aria-labelledby="demo-error-radios" name="quiz" onChange={handleRadioChange}>
+                    <RadioGroup
+                        aria-labelledby="demo-error-radios"
+                        name="quiz"
+                        defaultValue={answer}
+                        onChange={handleRadioChange}
+                    >
                         {data.answers.map((answer) => (
                             <div key={answer.id}>
                                 <Divider />

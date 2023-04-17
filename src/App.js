@@ -55,7 +55,7 @@ function App() {
                     <Route path="/trails" element={<TrailsPage />} />
                     <Route path="/trails/:trailId" element={<TrailPage />} />
                     <Route path="/field/:fieldId" element={<FieldPage />} />
-                    <Route path="/materials/:subfieldId" element={<MaterialsPage />} />
+                    <Route path="/materials/:subfieldId/type/:type/adress/:adressId" element={<MaterialsPage />} />
                 </Routes>
             </BrowserRouter>
         </UserProvider>

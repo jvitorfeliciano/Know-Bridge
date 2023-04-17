@@ -136,6 +136,7 @@ const Bottom = styled.div`
         font-size: 14px;
         line-height: 18px;
         color: ${colorDictionary.gray};
+        margin-bottom: 5px;
         cursor: pointer;
         :hover {
             text-decoration: underline;

@@ -9,7 +9,8 @@ export default function useReadSubfieldById(subfieldId) {
         loading: subfieldLoading,
         error: subfieldError,
         data: subfield,
+        act: getMaterials,
     } = useAsync(() => subfieldsApi.getSubfieldById(token, subfieldId), true);
 
-    return { subfieldLoading, subfieldError, subfield };
+    return { subfieldLoading, subfieldError, subfield, getMaterials };
 }
