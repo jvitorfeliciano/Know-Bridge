@@ -6,14 +6,16 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormLabel from "@mui/material/FormLabel";
 import Divider from "@mui/material/Divider";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../components/Button";
 import usePostQuestionAnswer from "../../hooks/api/usePostQuestionAnswer";
 import useToken from "../../hooks/useToken";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 
-export default function Question({ data }) {
+export default function Question({ data, setUpdate }) {
     const { questionAnswerLoading, postQuestionAnswer } = usePostQuestionAnswer();
-    const [answer, setAnswer] = useState();
+    const [isDone, setIsDone] = useState(data.isDone);
+    const [answer, setAnswer] = useState("");
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState();
     const token = useToken();
@@ -31,6 +33,8 @@ export default function Question({ data }) {
             const data = await postQuestionAnswer(token, answer);
             setHelperText(data.message);
             setError(false);
+            setUpdate((prev) => setUpdate(!prev));
+            setIsDone(true);
         } catch (err) {
             setHelperText(err.response.data.errors);
             setError(true);
@@ -56,9 +60,13 @@ export default function Question({ data }) {
                         ))}
                     </RadioGroup>
                     <FormHelperText>{helperText}</FormHelperText>
-                    <Button type="submit" disabled={questionAnswerLoading}>
-                        Chechar Resposta
-                    </Button>
+                    {isDone ? (
+                        <DoneAllIcon sx={{ position: "absolute", right: 0, bottom: "-20px" }} color="primary" />
+                    ) : (
+                        <Button type="submit" disabled={questionAnswerLoading}>
+                            Chechar Resposta
+                        </Button>
+                    )}
                 </FormControl>
             </form>
         </Container>
@@ -93,5 +101,8 @@ const Container = styled.div`
         position: absolute;
         right: 0;
         bottom: -55px;
+    }
+    @media (max-width: 900px) {
+        width: 100%;
     }
 `;

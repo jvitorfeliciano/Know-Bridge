@@ -9,6 +9,7 @@ import useDeleteEnrollmentOnTrail from "../../hooks/api/useDeleteEnrollmentOntra
 import useToken from "../../hooks/useToken";
 
 export default function TrailBox({ trail }) {
+    console.log(trail);
     const token = useToken();
     const navigate = useNavigate();
     const { createEnrollmentLoading, createEnrollmentOnTrail } = useCreateEnrollmentOnTrail();
@@ -42,6 +43,10 @@ export default function TrailBox({ trail }) {
         navigate(`/trails/${trailId}`);
     }
 
+    function navigateToFieldPage(fieldId) {
+        navigate(`/field/${fieldId}`);
+    }
+
     return (
         <Container>
             <Top>
@@ -59,12 +64,16 @@ export default function TrailBox({ trail }) {
             <Bottom>
                 <div>
                     {dataPartOne.map((field) => (
-                        <h3 key={field.id}>{field.title}</h3>
+                        <h3 key={field.id} onClick={() => navigateToFieldPage(field.id)}>
+                            {field.title}
+                        </h3>
                     ))}
                 </div>
                 <div>
                     {dataPartTwo.map((field) => (
-                        <h3 key={field.id}>{field.title}</h3>
+                        <h3 key={field.id} onClick={() => navigateToFieldPage(field.id)}>
+                            {field.title}
+                        </h3>
                     ))}
                 </div>
             </Bottom>
@@ -75,12 +84,15 @@ export default function TrailBox({ trail }) {
 const Container = styled.section`
     width: 580px;
     height: auto;
-    padding: 30px 100px;
+    padding: 30px;
     margin-top: 16px;
     background-color: ${colorDictionary.white};
     border: 1px solid rgba(33, 36, 44, 0.16);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 4px;
+    @media (max-width: 600px){
+        width: 100%;
+    }
 `;
 
 const Top = styled.div`
@@ -103,6 +115,9 @@ const TopLeft = styled.div`
         font-size: 16px;
         line-height: 20px;
         color: ${colorDictionary.gray};
+        :hover {
+            text-decoration: underline;
+        }
     }
 `;
 
@@ -112,6 +127,7 @@ const Bottom = styled.div`
     display: flex;
     justify-content: center;
     div {
+        width: 50%;
         margin-right: 10px;
         word-wrap: break-word;
         width: 50%;
@@ -126,5 +142,10 @@ const Bottom = styled.div`
         font-size: 14px;
         line-height: 18px;
         color: ${colorDictionary.gray};
+        margin-bottom: 5px;
+        cursor: pointer;
+        :hover {
+            text-decoration: underline;
+        }
     }
 `;

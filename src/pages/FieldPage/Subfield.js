@@ -2,21 +2,44 @@ import styled from "styled-components";
 import colorDictionary from "../../constants/colors";
 import MaterialDescription from "../../components/MateriaLDescription";
 import { useNavigate } from "react-router-dom";
+import { QuestionBadge } from "../../components/QuestionBadge";
+import VideoBagde from "../../components/VideoBadge";
+import ArticleBagde from "../../components/ArticleBadge";
 
 export default function Subfield({ subfield }) {
     const navigate = useNavigate();
+    console.log(subfield);
+    const navigateToMaterialsPage = (subfieldId, type, adress) => {
+        navigate(`/materials/${subfieldId}/type/${type}/adress/${adress}`);
+    };
 
     return (
         <Container>
-            <Title onClick={() => navigate(`/materials/${subfield.id}`)}>{subfield.title}</Title>
+            <Title onClick={() => navigateToMaterialsPage(subfield.id, subfield.videos[0].type, subfield.videos[0].id)}>
+                {subfield.title}
+            </Title>
             {subfield.videos.map((video) => (
                 <div key={video.id}>
-                    <MaterialDescription data={video} />
-                    {video.questions.map((question) => (
-                        <MaterialDescription data={question} key={question.id} />
-                    ))}
+                    {
+                        <VideoBagde
+                            data={video}
+                            onClick={() => navigateToMaterialsPage(subfield.id, video.type, video.id)}
+                        />
+                    }
+
                     {video.articles.map((article) => (
-                        <MaterialDescription data={article} key={article.id} />
+                        <ArticleBagde
+                            data={article}
+                            key={article.id}
+                            onClick={() => navigateToMaterialsPage(subfield.id, article.type, article.id)}
+                        />
+                    ))}
+                    {video.questions.map((question) => (
+                        <QuestionBadge
+                            data={question}
+                            key={question.id}
+                            onClick={() => navigateToMaterialsPage(subfield.id, question.type, question.id)}
+                        />
                     ))}
                 </div>
             ))}
@@ -44,4 +67,7 @@ const Title = styled.div`
     line-height: 24px;
     margin-bottom: 25px;
     cursor: pointer;
+    :hover {
+        text-decoration: underline;
+    }
 `;

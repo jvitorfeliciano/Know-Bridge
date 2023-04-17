@@ -1,17 +1,8 @@
 import styled from "styled-components";
-
-import { BsPlayBtn, BsPuzzle, BsBook } from "react-icons/bs";
 import colorDictionary from "../../constants/colors";
 
-export default function MaterialDescription({ data, ...props }) {
-    return (
-        <Container {...props} data={data}>
-            {data.type === "VIDEO" && <BsPlayBtn />}
-            {data.type === "QUESTION" && <BsPuzzle />}
-            {data.type === "ARTICLE" && <BsBook />}
-            <h3>{data.title}</h3>
-        </Container>
-    );
+export default function MaterialDescription({ children, ...props }) {
+    return <Container {...props}>{children}</Container>;
 }
 
 const Container = styled.div`
@@ -24,21 +15,21 @@ const Container = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
-    color: ${colorDictionary.gray};
+    color: ${colorDictionary.black};
     padding: 16px 0px 16px 16px;
-    background-color: ${(props) =>
-        props.displayedMaterial?.id === props.data.id && props.displayedMaterial?.type === props.data.type
-            ? colorDictionary.lightBlue
-            : ""};
-    border-left: ${(props) =>
-        props.displayedMaterial?.id === props.data.id && props.displayedMaterial?.type === props.data.type
-            ? `2px solid ${colorDictionary.blue}`
+    ${(props) =>
+        props.displayedMaterial?.type === props.data.type && props.displayedMaterial?.id === props.data.id
+            ? ` background: ${colorDictionary.lightBlue}; border-left: 2px solid ${colorDictionary.blue}`
             : ""};
     h3 {
         margin: 0 16px;
     }
     svg {
-        font-size: 24px;
+        font-size: 25px;
     }
     cursor: pointer;
+    :hover {
+        border-left: 2px solid black;
+        background: ${colorDictionary.brightGray};
+    }
 `;

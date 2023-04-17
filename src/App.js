@@ -12,8 +12,11 @@ import SignUp from "./pages/SignUp";
 import TrailPage from "./pages/TrailPage";
 import TrailsPage from "./pages/TrailsPage";
 import UserPage from "./pages/UserPage";
+import Courses from "./pages/UserPage/Courses";
 
 function App() {
+
+    console.log("passei no app")
     return (
         <UserProvider>
             <BrowserRouter>
@@ -45,17 +48,19 @@ function App() {
                         }
                     />
                     <Route
-                        path="/user/:userName"
+                        path="/user/:userName/"
                         element={
                             <ProtectedRouteGuard>
                                 <UserPage />
                             </ProtectedRouteGuard>
                         }
-                    />
+                    >
+                        <Route path="courses" element={<Courses />} />
+                    </Route>
                     <Route path="/trails" element={<TrailsPage />} />
                     <Route path="/trails/:trailId" element={<TrailPage />} />
-                    <Route path="/unity/:unityId" element={<FieldPage />} />
-                    <Route path="/materials/:subfieldId" element={<MaterialsPage />} />
+                    <Route path="/field/:fieldId" element={<FieldPage />} />
+                    <Route path="/materials/:subfieldId/type/:type/adress/:adressId" element={<MaterialsPage />} />
                 </Routes>
             </BrowserRouter>
         </UserProvider>
