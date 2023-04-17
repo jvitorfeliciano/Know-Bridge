@@ -8,11 +8,30 @@ import { useContext, useState } from "react";
 import UserContext from "../../contexts/userContext";
 import { FiMenu } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import * as authApi from "../../services/authApi";
+import useToken from "../../hooks/useToken";
 
 export default function Header() {
     const { userData } = useContext(UserContext);
     const navigate = useNavigate();
     const [showMenuBox, setShowMenuBox] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const token = useToken();
+
+    const signOut = async () => {
+        setLoading(true);
+        try {
+            await authApi.signOut(token);
+            setLoading(false);
+            setShowMenuBox(false);
+            localStorage.removeItem("userData");
+            window.location.reload();
+        } catch (err) {
+            setLoading(false);
+            setShowMenuBox(false);
+            console.log(err);
+        }
+    };
 
     return (
         <Container>
@@ -36,10 +55,15 @@ export default function Header() {
                         </Avatar>
                         {showMenuBox && (
                             <MenuBox>
-                                <StyledLink to={`/user/${userData.userName}/courses`}>
+                                <StyledLink
+                                    to={`/user/${userData.userName}/courses`}
+                                    onClick={() => setShowMenuBox(false)}
+                                >
                                     <Button>Página do Aluno</Button>
                                 </StyledLink>
-                                <Button>Sair</Button>
+                                <Button disabled={loading} onClick={signOut}>
+                                    Sair
+                                </Button>
                             </MenuBox>
                         )}
                     </>

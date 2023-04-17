@@ -15,6 +15,8 @@ import UserPage from "./pages/UserPage";
 import Courses from "./pages/UserPage/Courses";
 
 function App() {
+
+    console.log("passei no app")
     return (
         <UserProvider>
             <BrowserRouter>

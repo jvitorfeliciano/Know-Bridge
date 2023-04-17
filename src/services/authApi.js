@@ -1,4 +1,5 @@
 import api from "./api";
+import createConfig from "./helpers";
 
 async function signUp(body) {
     const response = await api.post("/auth/sign-up", body);
@@ -12,4 +13,11 @@ async function signIn(body) {
     return response.data;
 }
 
-export { signUp, signIn };
+async function signOut(token) {
+    const config = createConfig(token);
+    const response = await api.delete("/auth/sign-out", config);
+
+    return response.data;
+}
+
+export { signUp, signIn, signOut };
