@@ -20,13 +20,13 @@ export default function TrailsPage() {
 }
 
 const Container = styled.main`
-    width: 100vw;
-    height: calc(100vh - 60px);
+    width: 100%;
+    min-height: calc(100vh - 60px);
     background: ${colorDictionary.lightGray};
     display: flex;
     flex-direction: column;
     align-items: center;
-    @media (max-width: 600px){
+    @media (max-width: 600px) {
         padding: 0 20px;
     }
 `;

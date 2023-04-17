@@ -12,6 +12,7 @@ import SignUp from "./pages/SignUp";
 import TrailPage from "./pages/TrailPage";
 import TrailsPage from "./pages/TrailsPage";
 import UserPage from "./pages/UserPage";
+import Courses from "./pages/UserPage/Courses";
 
 function App() {
     return (
@@ -45,13 +46,15 @@ function App() {
                         }
                     />
                     <Route
-                        path="/user/:userName"
+                        path="/user/:userName/"
                         element={
                             <ProtectedRouteGuard>
                                 <UserPage />
                             </ProtectedRouteGuard>
                         }
-                    />
+                    >
+                        <Route path="courses" element={<Courses />} />
+                    </Route>
                     <Route path="/trails" element={<TrailsPage />} />
                     <Route path="/trails/:trailId" element={<TrailPage />} />
                     <Route path="/field/:fieldId" element={<FieldPage />} />

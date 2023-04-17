@@ -61,14 +61,16 @@ export default function MaterialsPage() {
             <DisplayedMaterial>
                 <Title>{displayedMaterial?.title}</Title>
                 {displayedMaterial?.type === "VIDEO" && <Video data={displayedMaterial} />}
-                {displayedMaterial?.type === "QUESTION" && <Question data={displayedMaterial} setUpdate={setUpdate} />}
+                {displayedMaterial?.type === "QUESTION" && (
+                    <Question data={displayedMaterial} setUpdate={setUpdate} key={displayedMaterial.id} />
+                )}
             </DisplayedMaterial>
         </Container>
     );
 }
 
 const Container = styled.main`
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 60px);
     background: ${colorDictionary.lightGray};
     display: flex;

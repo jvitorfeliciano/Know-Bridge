@@ -4,9 +4,7 @@ import colorDictionary from "../../constants/colors";
 export default function Legend({ children }) {
     return (
         <Container>
-            <div>
-                <h1>{children}</h1>
-            </div>
+            <div>{children}</div>
         </Container>
     );
 }
@@ -24,16 +22,15 @@ const Container = styled.div`
         height: 100%;
         display: flex;
         align-items: center;
-    }
-    h1 {
+        justify-content: center;
         font-family: "Inter";
         font-style: normal;
         font-weight: 900;
         font-size: 36px;
         line-height: 40px;
         color: ${colorDictionary.white};
-        @media (max-width: 700px){
-        font-size: 20px;
-    }
+        @media (max-width: 700px) {
+            font-size: 20px;
+        }
     }
 `;

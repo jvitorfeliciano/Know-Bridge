@@ -24,7 +24,7 @@ export default function SignIn() {
         try {
             const response = await signIn(data);
             setUserData(response);
-            navigate(`/user/${response.userName}`);
+            navigate(`/user/${response.userName}/courses`);
         } catch (err) {
             toast.error(err.response.data.errors, {
                 position: toast.POSITION.TOP_RIGHT,

@@ -7,9 +7,11 @@ import Avatar from "@mui/material/Avatar";
 import { useContext, useState } from "react";
 import UserContext from "../../contexts/userContext";
 import { FiMenu } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
     const { userData } = useContext(UserContext);
+    const navigate = useNavigate();
     const [showMenuBox, setShowMenuBox] = useState(false);
 
     return (
@@ -21,11 +23,27 @@ export default function Header() {
             </div>
             <Middle>
                 <img src={logo} alt="logo" />
-
                 <h1>KnowBridge</h1>
             </Middle>
             <Right>
-                {userData && <Avatar sx={{ bgcolor: "purple" }}>{userData.userName[0]}</Avatar>}
+                {userData && (
+                    <>
+                        <Avatar
+                            sx={{ bgcolor: "purple", cursor: "pointer" }}
+                            onClick={() => setShowMenuBox((prev) => !prev)}
+                        >
+                            {userData.userName[0]}
+                        </Avatar>
+                        {showMenuBox && (
+                            <MenuBox>
+                                <StyledLink to={`/user/${userData.userName}/courses`}>
+                                    <Button>Página do Aluno</Button>
+                                </StyledLink>
+                                <Button>Sair</Button>
+                            </MenuBox>
+                        )}
+                    </>
+                )}
                 {!userData && (
                     <>
                         <Buttons>
@@ -40,10 +58,21 @@ export default function Header() {
                             <FiMenu onClick={() => setShowMenuBox((prev) => !prev)} />
                             {showMenuBox && (
                                 <MenuBox>
-                                    <StyledLink to="/sign-in">
+                                    <StyledLink
+                                        to="/sign-in"
+                                        onClick={() => {
+                                            setShowMenuBox(false);
+                                        }}
+                                    >
                                         <Button>Entrar</Button>
                                     </StyledLink>
-                                    <StyledLink to="/sign-up">
+                                    <StyledLink
+                                        to="sign-up"
+                                        onClick={() => {
+                                            navigate("/sign-up");
+                                            setShowMenuBox(false);
+                                        }}
+                                    >
                                         <Button>Cadastrar-se</Button>
                                     </StyledLink>
                                 </MenuBox>
@@ -57,13 +86,14 @@ export default function Header() {
 }
 
 const Container = styled.header`
-    width: 100vw;
+    width: 100%;
     height: 60px;
     padding: 20px 5%;
     background-color: ${colorDictionary.navyBlue};
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 `;
 
 const Right = styled.div`
@@ -113,7 +143,6 @@ const Buttons = styled.div`
 
 const Menu = styled.div`
     display: none;
-    position: relative;
     svg {
         font-size: 30px;
         color: ${colorDictionary.white};
@@ -128,11 +157,12 @@ const MenuBox = styled.div`
     width: 200px;
     height: auto;
     padding: 10px;
-    border-top: 2px solid ${colorDictionary.white};
+    border: 2px solid ${colorDictionary.white};
     background: ${colorDictionary.navyBlue};
     position: absolute;
-    right: 3px;
-    bottom: -120px;
+    right: 28px;
+    bottom: -110px;
+    z-index: 1;
     button {
         width: 100% !important;
         margin: 0 0 5px;

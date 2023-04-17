@@ -49,8 +49,8 @@ const Bottom = styled.section`
 `;
 
 const Container = styled.div`
-    width: 100vw;
-    min-height: calc(100vh - 60px);
+    width: 100%;
+    min-height: calc(100% - 60px);
     background: ${colorDictionary.lightGray};
 `;
 

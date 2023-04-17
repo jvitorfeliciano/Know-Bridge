@@ -17,9 +17,7 @@ export default function FieldPage() {
 
     return (
         <Container>
-            <Legend>
-                {field.title}
-            </Legend>
+            <Legend>{field.title}</Legend>
             <Subfields>
                 {field.subfields.map((subfield) => (
                     <Subfield subfield={subfield} key={subfield.id} />
@@ -30,18 +28,19 @@ export default function FieldPage() {
 }
 
 const Container = styled.div`
-    width: 100vw;
-    height: calc(100vh - 60px);
+    width: 100%;
+    min-height: calc(100vh - 60px);
     background: ${colorDictionary.lightGray};
     display: flex;
     flex-direction: column;
     align-items: center;
-`
+    padding-bottom: 50px;
+`;
 
 const Subfields = styled.div`
     width: 670px;
     height: auto;
-    @media (max-width: 700px){
+    @media (max-width: 700px) {
         width: 100%;
     }
 `;

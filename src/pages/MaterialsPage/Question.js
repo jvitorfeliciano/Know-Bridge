@@ -21,13 +21,6 @@ export default function Question({ data, setUpdate }) {
     const token = useToken();
     const handleRadioChange = (event) => setAnswer(event.target.value);
 
-    useEffect(() => {
-        setAnswer(undefined);
-        setHelperText(undefined);
-        setIsDone(data.isDone);
-        setError(false);
-    }, [data]);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -57,12 +50,7 @@ export default function Question({ data, setUpdate }) {
                     <FormLabel id="demo-error-radios" sx={{ marginBottom: "10px" }}>
                         Escolha uma resposta:
                     </FormLabel>
-                    <RadioGroup
-                        aria-labelledby="demo-error-radios"
-                        name="quiz"
-                        defaultValue={answer}
-                        onChange={handleRadioChange}
-                    >
+                    <RadioGroup aria-labelledby="demo-error-radios" name="quiz" onChange={handleRadioChange}>
                         {data.answers.map((answer) => (
                             <div key={answer.id}>
                                 <Divider />

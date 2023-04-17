@@ -26,8 +26,8 @@ export default function HomePage() {
 }
 
 const Container = styled.main`
-    width: 100vw;
-    height: calc(100vh - 60px);
+    width: 100%;
+    min-height: calc(100vh - 60px);
     display: flex;
     padding-top: 80px;
 `;

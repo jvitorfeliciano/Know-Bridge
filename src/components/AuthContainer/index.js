@@ -5,8 +5,8 @@ export default function AuthContainer({ children }) {
 }
 
 const Container = styled.main`
-    width: 100vw;
-    height: calc(100vh - 60px);
+    width: 100%;
+    min-height: calc(100vh - 60px);
     display: flex;
     justify-content: center;
     align-items: center;
