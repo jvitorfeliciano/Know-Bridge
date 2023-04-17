@@ -26,4 +26,7 @@ const Container = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media (max-width: 600px){
+        padding: 0 20px;
+    }
 `;

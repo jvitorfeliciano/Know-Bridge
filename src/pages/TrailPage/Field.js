@@ -7,6 +7,12 @@ import ProgressBar from "../../components/ProgressBar";
 export default function Field({ field }) {
     const navigate = useNavigate();
 
+    const navigateToMaterialsPage = (subfieldId, type, adress) => {
+        navigate(`/materials/${subfieldId}/type/${type}/adress/${adress}`);
+    };
+
+    console.log(field);
+
     const middle = Math.ceil(field.subfields.length / 2);
     const dataPartOne = field.subfields.slice(0, middle);
     const dataPartTwo = field.subfields.slice(middle);
@@ -28,12 +34,26 @@ export default function Field({ field }) {
             <Bottom>
                 <div>
                     {dataPartOne.map((subfield) => (
-                        <h3 key={subfield.id}>{subfield.title}</h3>
+                        <h3
+                            key={subfield.id}
+                            onClick={() =>
+                                navigateToMaterialsPage(subfield.id, subfield.videos[0].type, subfield.videos[0].id)
+                            }
+                        >
+                            {subfield.title}
+                        </h3>
                     ))}
                 </div>
                 <div>
                     {dataPartTwo.map((subfield) => (
-                        <h3 key={subfield.id}>{subfield.title}</h3>
+                        <h3
+                            key={subfield.id}
+                            onClick={() =>
+                                navigateToMaterialsPage(subfield.id, subfield.videos[0].type, subfield.videos[0].id)
+                            }
+                        >
+                            {subfield.title}
+                        </h3>
                     ))}
                 </div>
             </Bottom>
@@ -41,7 +61,7 @@ export default function Field({ field }) {
     );
 }
 
-const Container = styled.section`
+const Container = styled.div`
     width: 100%;
     height: auto;
     padding: 18px;
@@ -75,6 +95,9 @@ const TopLeft = styled.div`
         font-weight: 700;
         font-size: 16px;
         line-height: 20px;
+        :hover {
+            text-decoration: underline;
+        }
     }
 `;
 const TopRight = styled.div`

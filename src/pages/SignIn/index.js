@@ -13,7 +13,7 @@ import UserContext from "../../contexts/userContext";
 
 export default function SignIn() {
     const [data, setData] = useState({ email: "", password: "" });
-    const {setUserData} = useContext(UserContext);
+    const { setUserData } = useContext(UserContext);
     const { signInLoading, signIn } = useSignIn();
     const navigate = useNavigate();
     const handleFormChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
@@ -70,7 +70,7 @@ export default function SignIn() {
 
 const Form = styled.form`
     width: 545px;
-    height: 350px;
+    height: 400px;
     border-radius: 15px;
     background: ${colorDictionary.white};
     padding: 0 45px;

@@ -5,7 +5,7 @@ import Badge from "@mui/material/Badge";
 
 export function QuestionBadge({ data, ...props }) {
     return (
-        <MaterialDescription {...props}>
+        <MaterialDescription {...props} data={data}>
             {data.isDone ? (
                 <Badge badgeContent={<CheckCircleIcon style={{ fontSize: "18px" }} color="primary" />}>
                     <HiOutlinePencilAlt />

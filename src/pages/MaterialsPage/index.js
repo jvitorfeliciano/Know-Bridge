@@ -16,7 +16,6 @@ export default function MaterialsPage() {
     const [data, setData] = useState(null);
     const [displayedMaterial, setDisplayedMaterial] = useState(null);
     const token = useToken();
-    console.log(displayedMaterial);
 
     useEffect(() => {
         const getMaterials = async () => {
@@ -30,7 +29,7 @@ export default function MaterialsPage() {
             }
         };
         getMaterials();
-    }, [update, subfieldId]);
+    }, [update, subfieldId, token]);
 
     useEffect(() => {
         if (data) {
@@ -58,11 +57,7 @@ export default function MaterialsPage() {
 
     return (
         <Container>
-            <MaterialsSummary
-                subfield={data}
-                setDisplayedMaterial={setDisplayedMaterial}
-                displayedMaterial={displayedMaterial}
-            />
+            <MaterialsSummary subfield={data} displayedMaterial={displayedMaterial} />
             <DisplayedMaterial>
                 <Title>{displayedMaterial?.title}</Title>
                 {displayedMaterial?.type === "VIDEO" && <Video data={displayedMaterial} />}
@@ -90,6 +85,10 @@ const DisplayedMaterial = styled.section`
     flex-direction: column;
     align-items: center;
     border-left: 1px solid rgba(33, 36, 44, 0.16);
+    @media (max-width: 900px) {
+        width: 100%;
+        padding: 24px 0;
+    }
 `;
 
 const Title = styled.h1`

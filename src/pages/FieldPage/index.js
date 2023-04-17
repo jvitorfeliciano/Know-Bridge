@@ -4,6 +4,8 @@ import Subfield from "./Subfield";
 import styled from "styled-components";
 import useReadFieldById from "../../hooks/api/useReadFieldById";
 import SkeletonLoading from "../../components/SkeletionLoading/SkeletonLoading";
+import Legend from "../../components/Legend";
+import colorDictionary from "../../constants/colors";
 
 export default function FieldPage() {
     const { fieldId } = useParams();
@@ -14,17 +16,32 @@ export default function FieldPage() {
     }
 
     return (
-        <MainContainer>
+        <Container>
+            <Legend>
+                {field.title}
+            </Legend>
             <Subfields>
                 {field.subfields.map((subfield) => (
                     <Subfield subfield={subfield} key={subfield.id} />
                 ))}
             </Subfields>
-        </MainContainer>
+        </Container>
     );
 }
+
+const Container = styled.div`
+    width: 100vw;
+    height: calc(100vh - 60px);
+    background: ${colorDictionary.lightGray};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
 
 const Subfields = styled.div`
     width: 670px;
     height: auto;
+    @media (max-width: 700px){
+        width: 100%;
+    }
 `;

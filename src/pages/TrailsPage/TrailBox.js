@@ -90,6 +90,9 @@ const Container = styled.section`
     border: 1px solid rgba(33, 36, 44, 0.16);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 4px;
+    @media (max-width: 600px){
+        width: 100%;
+    }
 `;
 
 const Top = styled.div`
@@ -112,6 +115,9 @@ const TopLeft = styled.div`
         font-size: 16px;
         line-height: 20px;
         color: ${colorDictionary.gray};
+        :hover {
+            text-decoration: underline;
+        }
     }
 `;
 

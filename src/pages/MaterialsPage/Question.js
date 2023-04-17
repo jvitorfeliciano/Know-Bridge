@@ -24,6 +24,7 @@ export default function Question({ data, setUpdate }) {
     useEffect(() => {
         setAnswer(undefined);
         setHelperText(undefined);
+        setIsDone(data.isDone);
         setError(false);
     }, [data]);
 
@@ -112,5 +113,8 @@ const Container = styled.div`
         position: absolute;
         right: 0;
         bottom: -55px;
+    }
+    @media (max-width: 900px) {
+        width: 100%;
     }
 `;

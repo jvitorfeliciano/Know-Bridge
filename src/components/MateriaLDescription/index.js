@@ -15,9 +15,12 @@ const Container = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
-    color: ${colorDictionary.gray};
+    color: ${colorDictionary.black};
     padding: 16px 0px 16px 16px;
-
+    ${(props) =>
+        props.displayedMaterial?.type === props.data.type && props.displayedMaterial?.id === props.data.id
+            ? ` background: ${colorDictionary.lightBlue}; border-left: 2px solid ${colorDictionary.blue}`
+            : ""};
     h3 {
         margin: 0 16px;
     }
@@ -25,4 +28,8 @@ const Container = styled.div`
         font-size: 25px;
     }
     cursor: pointer;
+    :hover {
+        border-left: 2px solid black;
+        background: ${colorDictionary.brightGray};
+    }
 `;

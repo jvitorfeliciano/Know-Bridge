@@ -25,4 +25,9 @@ const Container = styled.main`
             background-position: 0% 50%;
         }
     }
-`;
+
+    @media (max-width: 570px){
+        padding: 0 20px;
+    }
+    
+`

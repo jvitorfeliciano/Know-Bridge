@@ -8,7 +8,7 @@ import ArticleBagde from "../../components/ArticleBadge";
 
 export default function Subfield({ subfield }) {
     const navigate = useNavigate();
- 
+    console.log(subfield);
     const navigateToMaterialsPage = (subfieldId, type, adress) => {
         navigate(`/materials/${subfieldId}/type/${type}/adress/${adress}`);
     };
@@ -67,4 +67,7 @@ const Title = styled.div`
     line-height: 24px;
     margin-bottom: 25px;
     cursor: pointer;
+    :hover {
+        text-decoration: underline;
+    }
 `;
